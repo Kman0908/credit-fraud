@@ -1,3 +1,6 @@
 .venv/
 Data/
 catboost_info/
+logs/
+artifacts/
+__pycache__/
