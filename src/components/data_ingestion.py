@@ -1,8 +1,10 @@
 import os
 import sys
+from dataclasses import dataclass
+
 from src.logger import logging
 from src.exception import CustomException
-from dataclasses import dataclass
+from src.components.data_transformation import DataTransformation
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -44,3 +46,6 @@ class DataIngestion:
 if __name__ == '__main__':
     data_ingestion_obj = DataIngestion()
     train_path, test_path = data_ingestion_obj.initiate_data_ingestion()
+
+    data_transformation_obj = DataTransformation()
+    train, test, _ = data_transformation_obj.initiate_preprocessing(train_path, test_path)
