@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from src.logger import logging
 from src.exception import CustomException
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -49,3 +50,6 @@ if __name__ == '__main__':
 
     data_transformation_obj = DataTransformation()
     train, test, _ = data_transformation_obj.initiate_preprocessing(train_path, test_path)
+
+    model_trainer_obj = ModelTrainer()
+    model_trainer_obj.initiate_training(train, test)

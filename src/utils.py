@@ -4,6 +4,7 @@ import sys
 from src.exception import CustomException
 from src.logger import logging
 
+from sklearn.metrics import f1_score
 import pickle
 
 def save_obj(path, obj):
@@ -13,3 +14,22 @@ def save_obj(path, obj):
     except Exception as e:
         logging.exception('Error occurred at utils.save_obj')
         raise CustomException(e, sys)
+    
+def evaluate_model(X_train, X_test, y_train, y_test, models: dict):
+    report = {}
+    try:
+        for i in range(len(models)):
+            model = list(models.values())[i]
+
+            model.fit(X_train, y_train)
+            y_test_pred = model.predict(X_test)
+            # Receiver Operating Characteristic - Area Under the Curve
+            score = f1_score(y_test, y_test_pred)
+
+            report[list(models.keys())[i]] = score
+
+        return report
+    except Exception as e:
+        logging.exception('Error occurred at utils.evaluate_model')
+        raise CustomException(e, sys)
+
