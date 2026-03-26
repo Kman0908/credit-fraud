@@ -33,3 +33,10 @@ def evaluate_model(X_train, X_test, y_train, y_test, models: dict):
         logging.exception('Error occurred at utils.evaluate_model')
         raise CustomException(e, sys)
 
+def load_obj(path):
+    try:
+        with open(path, 'rb') as f:
+            return pickle.load(f)
+    except Exception as e:
+        logging.exception('Error occurred at utils.load_obj')
+        raise CustomException(e, sys)
